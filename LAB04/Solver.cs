@@ -1,4 +1,6 @@
-﻿namespace LAB04
+﻿using System.Reflection.Metadata.Ecma335;
+
+namespace LAB04
 {
     /// <summary>
     /// Класс Solver содержит решения задач лабораторной работы.
@@ -25,7 +27,9 @@
         public static string IntroduceYourself(string name, int age)
         {
             // Реализовать метод для решения задачи
-            throw new NotImplementedException();
+            name = name.ToLower();
+            string formattedName = char.ToUpper(name[0]) + name.Substring(1);
+            return $"Hello! My name is {formattedName} and i am {age} years old.";
         }
 
         // =========================
@@ -76,8 +80,9 @@
         public static string RublesToDollars(double rubles)
         {
             // Реализовать метод для решения задачи
-            throw new NotImplementedException();
-        }
+            double dollars = Math.Floor(rubles / 2.94);
+            return $"{rubles} рублей = {dollars} долларов";
+        } 
 
         /// <summary>
         /// Задача 4. Преобразует количество секунд в часы, минуты и секунды.
@@ -176,7 +181,11 @@
         public static string GetQuadrant(double x, double y)
         {
             // Реализовать метод для решения задачи
-            throw new NotImplementedException();
+            if (x > 0 && y > 0) return $"Точка ({x}, {y}) находится в I четверти";
+            else if (x < 0 && y > 0) return $"Точка ({x}, {y}) находится в II четверти";
+            else if (x < 0 && y < 0) return $"Точка ({x}, {y}) находится в III четверти";
+            else if (x > 0 && y < 0) return $"Точка ({x}, {y}) находится в IV четверти";
+            else return $"Точка ({x}, {y}) находится на пересечении четвертей";
         }
 
         /// <summary>
@@ -273,7 +282,19 @@
         public static string FibonacciSum(int n)
         {
             // Реализовать метод для решения задачи
-            throw new NotImplementedException();
+            if (n <= 0) return $"Невозможно вычислить сумму";
+
+            int sum = 0;
+            int a = 0;
+            int b = 1;
+            for (int i = 1; i <= n; i++)
+            {
+                sum += a;
+                int next = a + b;
+                a = b;
+                b = next;
+            }
+            return $"Сумма Первых {n} чисел Фибоначчи = {sum}";
         }
 
         /// <summary>
@@ -374,7 +395,23 @@
         public static string ReverseArray(int[] array)
         {
             // Реализовать метод для решения задачи
-            throw new NotImplementedException();
+           if (array.Length == 0) return $"Массив не может быть пустым";
+
+            for (int i = 0; i < array.Length / 2; i++)
+            {
+                int end_el_index = array.Length - 1 - i;
+                int temp = array[i];
+                array[i] = array[end_el_index];
+                array[end_el_index] = temp;
+            }
+
+            string result = null;
+            for (int i = 0; i < array.Length; i++)
+            {
+                result += array[i];
+                if (i < array.Length - 1) result += " "; 
+            }
+            return $"Обратный массив: {result}";
         }
 
         /// <summary>
